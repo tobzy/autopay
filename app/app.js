@@ -22,17 +22,17 @@ app.setHandler({
     'LAUNCH': function () {
         // this.ask('Fetching pending batches.');
         // this.toIntent('feedbackIntent','Fetching pending batches.')
-        this.toIntent('checkPendingBatches');
+        this.toIntent('fetchingBatchFeedbackIntent');
     },
 
-    // 'HelloWorldIntent': function() {
-    //     this.ask('Hello World! What\'s your name?', 'Please tell me your name.');
-    // },
+    'fetchingBatchFeedbackIntent': function () {
+        this.ask('Fetching pending batches.');
+    },
+
     'checkPendingBatches': function () {
         //fetch pending batches
         axios.get('https://reqres.in/api/users?page=2')
             .then(response => {
-                console.log(response.data);
                 //read out all batches
                 let speech = this.speechBuilder()
                 for (let i = 0; i < 5; i++) {
@@ -41,12 +41,11 @@ app.setHandler({
 
                 }
                 speech.addText('Which batch do you want to commit?');
-
                 this.ask(speech);
 
                 //ask what batch to commit
                 // this.ask('Which batch do you want to commit?');
-                this.toIntent('commitBatch');
+                // this.toIntent('commitBatch');
             })
             .catch(error => {
                 console.log(error);
@@ -57,7 +56,6 @@ app.setHandler({
         // this.ask(`committing batch ${name.value}`);
         axios.get('https://reqres.in/api/users?page=2')
             .then(response => {
-                console.log(response.data);
                 //successful
                 this.ask('Batch committed successfully');
             })
@@ -66,8 +64,8 @@ app.setHandler({
             });
     },
 
-    'feedbackIntent': function (data) {
-
+    'Unhandled': function () {
+        // Triggered when the requested intent could not be found in the handlers variable
     },
 
 
