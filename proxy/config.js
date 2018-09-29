@@ -3,9 +3,9 @@
 const argv = require('yargs').argv;
 
 const options = {
-    host: process.env.HOST || 'http://localhost',
+    host: process.env.HOST || 'http://www.amock.io',
     port: process.env.PORT || '8080',
-    basePath: '/autopay.dc/api/v1/alexa'
+    basePath: '/api/garrieo'
 };
 
 class Config{
@@ -14,7 +14,7 @@ class Config{
     }
 
     stringifyUrl(){
-        let url = options.host + ':' + options.port + options.basePath;
+        let url = options.host + options.basePath;
         console.log('Proxy URL: %s', url);
 
         return url;

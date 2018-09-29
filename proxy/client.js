@@ -16,7 +16,7 @@ class Client {
 
     getBatches(corporateCode) {
 
-        axios.get('/pendingcommit',{
+        axios.get('/getbatches',{
                 params: {
                     corporateCode: corporateCode
                 },
